@@ -4,13 +4,23 @@
 \name{hdrs}
 \alias{hdrs}
 \alias{hdrs-package}
-\title{...}
+\title{Have Some Fun with 'HTTP' Headers}
 \description{
+Methods are provided to retrieve and test 'HTTP' headers from
+a website. An 'HTTP' request and response header reference/explanatory
+data frame is also provided via the 'hsecsecan' project
+(\url{https://github.com/riramar/hsecscan}).
+}
+\details{
 \itemize{
 \item URL: \url{https://gitlab.com/hrbrmstr/hdrs}
 \item BugReports: \url{https://gitlab.com/hrbrmstr/hdrs/issues}
 }
 }
+\references{
+\url{https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#tab=Technical_Resources}
+}
 \author{
 Bob Rudis (bob@rud.is)
 }
+\keyword{internal}

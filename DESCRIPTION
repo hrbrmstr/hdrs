@@ -1,25 +1,33 @@
 Package: hdrs
 Type: Package
-Title: hdrs title goes here otherwise CRAN checks fail
+Title: Have Some Fun with 'HTTP' Headers
 Version: 0.1.0
 Date: 2019-03-05
 Authors@R: c(
     person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 
-           comment = c(ORCID = "0000-0001-5670-2640"))
+           comment = c(ORCID = "0000-0001-5670-2640")),
+    person("Ricardo", "Iramar dos Santos", email = "ricardo.iramar@gmail.com",
+           role = "aut", comment = "hsecscan.db creator/maintainer")
   )
 Maintainer: Bob Rudis <bob@rud.is>
-Description: A good description goes here otherwise CRAN checks fail.
+Description: Methods are provided to retrieve and test 'HTTP' headers from 
+    a website. An 'HTTP' request and response header reference/explanatory
+    data frame is also provided via the 'hsecsecan' project 
+    (<https://github.com/riramar/hsecscan>).
 URL: https://gitlab.com/hrbrmstr/hdrs
 BugReports: https://gitlab.com/hrbrmstr/hdrs/issues
 Encoding: UTF-8
 License: AGPL
 Suggests:
     testthat,
-    covr
+    covr,
+    DT
 Depends:
     R (>= 3.2.0)
 Imports:
     httr,
-    jsonlite
+    shiny,
+    magrittr,
+    utils
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1

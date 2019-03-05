@@ -1,10 +1,10 @@
 ---
 output: rmarkdown::github_document
 editor_options: 
-  chunk_output_type: inline
+  chunk_output_type: console
 ---
 ```{r pkg-knitr-opts, include=FALSE}
-knitr$opts_chunk$set(collapse=TRUE, fig.retina=2, message=FALSE, warning=FALSE)
+knitr::opts_chunk$set(collapse=TRUE, fig.retina=2, message=FALSE, warning=FALSE)
 options(width=120)
 ```
 
@@ -14,18 +14,28 @@ options(width=120)
 
 # hdrs
 
+Have Some Fun with 'HTTP' Headers
+
 ## Description
+
+Methods are provided to retrieve and test 'HTTP' headers from 
+a website. An 'HTTP' request and response header reference/explanatory
+data frame is also provided via the 'hsecsecan' project 
+(<https://github.com/riramar/hsecscan>)
 
 ## What's Inside The Tin
 
 The following functions are implemented:
 
+- `assess_security_headers`:	Assess "security" headers for a given URL
+- `explain_headers`:	Explain HTTP headers found from a URL request
+- `explore_app`:	A Shiny App for Exploring HTTP Headers
+- `http_headers`:	HTTP Header Reference
+
 ## Installation
 
 ```{r install-ex, eval=FALSE}
-devtools::install_git("https://gitlab.com/hrbrmstr/hdrs.git")
-# or
-devtools::install_github("hrbrmstr/hdrs")
+install.packages("hdrs", repos = "https://cinc.rud.is/")
 ```
 
 ## Usage
@@ -36,6 +46,36 @@ library(hdrs)
 # current version
 packageVersion("hdrs")
 
+```
+
+```{r basic}
+assess_security_headers("https://cran.r-project.org") %>% 
+  dplyr::select(-url) %>% 
+  gt::gt()
+```
+
+Tsk, tsk&hellip;
+
+```{r someworktodo}
+assess_security_headers("https://rud.is/b") %>% 
+  dplyr::select(-url) %>% 
+  gt::gt()
+```
+
+Looks like I gots some 'splainin to do as well.
+
+```{r all}
+hdrs::explain_headers("https://community.rstudio.com/") %>% 
+  dplyr::select(header,value, enable, security_reference, recommendations) %>% 
+  gt::gt()
+```
+
+### Reference
+
+```{r ref}
+data(http_headers)
+
+dplyr::glimpse(http_headers)
 ```
 
 ## hdrs Metrics

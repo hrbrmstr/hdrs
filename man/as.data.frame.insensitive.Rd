@@ -4,13 +4,18 @@
 \alias{as.data.frame.insensitive}
 \title{Turn `httr::headers()`` objects into a data frame}
 \usage{
-\method{as.data.frame}{insensitive}(x, tbl = TRUE, ...,
-  stringsAsFactors = FALSE)
+\method{as.data.frame}{insensitive}(x, row.names = NULL,
+  optional = FALSE, tbl = TRUE, ..., stringsAsFactors = FALSE)
 }
 \arguments{
 \item{x}{an object returned from a call to \code{\link[httr:headers]{httr::headers()}}. This is
 a \code{list} classed as \code{insensitive} which is pretty generic but
 this method has a pretty thin use case and shouldn't cause issues.}
+
+\item{row.names}{\code{NULL} or a character vector giving the row names for the
+data frame. Missing values are not allowed.}
+
+\item{optional}{ignored}
 
 \item{tbl}{if \code{TRUE} (the default) will class the output as a tibble}
 

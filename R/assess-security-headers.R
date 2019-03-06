@@ -19,11 +19,12 @@ c(
 #' @param url target URL
 #' @param include_ref if `TRUE` (default: `FALSE`) the data frame will contains
 #'     information reference fields from [http_headers]
+#' @param ... passed on to the final [httr::HEAD()] request.
 #' @return data frame (tibble)
 #' @export
-assess_security_headers <- function(url, include_ref = FALSE) {
+assess_security_headers <- function(url, include_ref = FALSE, ...) {
 
-  res <- get_response_headers(url)
+  res <- get_response_headers(url, ...)
 
   if (length(res)) {
 

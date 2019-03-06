@@ -20,6 +20,8 @@ is also provided via the ‘hsecsecan’ project
 
 The following functions are implemented:
 
+  - `as.data.frame.insensitive`: Turn `httr::headers()` objects into a
+    data frame
   - `assess_security_headers`: Assess “security” headers for a given URL
   - `explain_headers`: Explain HTTP headers found from a URL request
   - `explore_app`: A Shiny App for Exploring HTTP Headers
@@ -35,10 +37,40 @@ install.packages("hdrs", repos = "https://cinc.rud.is/")
 
 ``` r
 library(hdrs)
+library(tibble) # for printing
 
 # current version
 packageVersion("hdrs")
-## [1] '0.1.0'
+## [1] '0.2.0'
+```
+
+``` r
+httr::HEAD("https://rud.is/b") %>% 
+  httr::headers() %>% 
+  as.data.frame()
+## # A tibble: 20 x 2
+##    name                   value                                                                                         
+##    <chr>                  <chr>                                                                                         
+##  1 server                 nginx                                                                                         
+##  2 date                   Wed, 06 Mar 2019 12:27:15 GMT                                                                 
+##  3 content-type           text/html; charset=UTF-8                                                                      
+##  4 connection             keep-alive                                                                                    
+##  5 vary                   Accept-Encoding                                                                               
+##  6 set-cookie             PHPSESSID=0f2uckd4t1tuf55hhecpk73i63; path=/                                                  
+##  7 expires                Thu, 07 Mar 2019 12:27:15 GMT                                                                 
+##  8 cache-control          max-age=86400                                                                                 
+##  9 pragma                 no-cache                                                                                      
+## 10 link                   "<https://rud.is/b/wp-json/>; rel=\"https://api.w.org/\""                                     
+## 11 link                   <https://wp.me/23idr>; rel=shortlink                                                          
+## 12 strict-transport-secu… max-age=31536000; includeSubDomains; preload                                                  
+## 13 content-security-poli… default-src 'self' data: fonts.gstatic.com fonts.googleapis.com cdn.ampproject.org *.ampproje…
+## 14 x-frame-options        SAMEORIGIN                                                                                    
+## 15 referrer-policy        no-referrer-when-downgrade                                                                    
+## 16 feature-policy         geolocation 'none';midi 'none';sync-xhr 'none';microphone 'none';camera 'none';magnetometer '…
+## 17 x-powered-by           <3                                                                                            
+## 18 x-xss-protection       1; mode=block                                                                                 
+## 19 x-content-type-options nosniff                                                                                       
+## 20 content-encoding       gzip
 ```
 
 ``` r
@@ -53,7 +85,7 @@ assess_security_headers("https://cran.r-project.org") %>%
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
-#dcxxmcqtmy .gt_table {
+#lsgjsbdkdu .gt_table {
   border-collapse: collapse;
   margin-left: auto;
   margin-right: auto;
@@ -71,13 +103,13 @@ assess_security_headers("https://cran.r-project.org") %>%
   /* table.border.top.color */
 }
 
-#dcxxmcqtmy .gt_heading {
+#lsgjsbdkdu .gt_heading {
   background-color: #FFFFFF;
   /* heading.background.color */
   border-bottom-color: #FFFFFF;
 }
 
-#dcxxmcqtmy .gt_title {
+#lsgjsbdkdu .gt_title {
   color: #000000;
   font-size: 125%;
   /* heading.title.font.size */
@@ -88,7 +120,7 @@ assess_security_headers("https://cran.r-project.org") %>%
   border-bottom-width: 0;
 }
 
-#dcxxmcqtmy .gt_subtitle {
+#lsgjsbdkdu .gt_subtitle {
   color: #000000;
   font-size: 85%;
   /* heading.subtitle.font.size */
@@ -99,7 +131,7 @@ assess_security_headers("https://cran.r-project.org") %>%
   border-top-width: 0;
 }
 
-#dcxxmcqtmy .gt_bottom_border {
+#lsgjsbdkdu .gt_bottom_border {
   border-bottom-style: solid;
   /* heading.border.bottom.style */
   border-bottom-width: 2px;
@@ -108,7 +140,7 @@ assess_security_headers("https://cran.r-project.org") %>%
   /* heading.border.bottom.color */
 }
 
-#dcxxmcqtmy .gt_column_spanner {
+#lsgjsbdkdu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #A8A8A8;
@@ -116,7 +148,7 @@ assess_security_headers("https://cran.r-project.org") %>%
   padding-bottom: 4px;
 }
 
-#dcxxmcqtmy .gt_col_heading {
+#lsgjsbdkdu .gt_col_heading {
   color: #000000;
   background-color: #FFFFFF;
   /* column_labels.background.color */
@@ -128,11 +160,11 @@ assess_security_headers("https://cran.r-project.org") %>%
   margin: 10px;
 }
 
-#dcxxmcqtmy .gt_sep_right {
+#lsgjsbdkdu .gt_sep_right {
   border-right: 5px solid #FFFFFF;
 }
 
-#dcxxmcqtmy .gt_group_heading {
+#lsgjsbdkdu .gt_group_heading {
   padding: 8px;
   color: #000000;
   background-color: #FFFFFF;
@@ -155,7 +187,7 @@ assess_security_headers("https://cran.r-project.org") %>%
   /* stub_group.border.bottom  .color */
 }
 
-#dcxxmcqtmy .gt_empty_group_heading {
+#lsgjsbdkdu .gt_empty_group_heading {
   padding: 0.5px;
   color: #000000;
   background-color: #FFFFFF;
@@ -178,28 +210,28 @@ assess_security_headers("https://cran.r-project.org") %>%
   /* stub_group.border.bottom  .color */
 }
 
-#dcxxmcqtmy .gt_striped tr:nth-child(even) {
+#lsgjsbdkdu .gt_striped tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-#dcxxmcqtmy .gt_row {
+#lsgjsbdkdu .gt_row {
   padding: 10px;
   /* row.padding */
   margin: 10px;
 }
 
-#dcxxmcqtmy .gt_stub {
+#lsgjsbdkdu .gt_stub {
   border-right-style: solid;
   border-right-width: 2px;
   border-right-color: #A8A8A8;
   text-indent: 5px;
 }
 
-#dcxxmcqtmy .gt_stub.gt_row {
+#lsgjsbdkdu .gt_stub.gt_row {
   background-color: #FFFFFF;
 }
 
-#dcxxmcqtmy .gt_summary_row {
+#lsgjsbdkdu .gt_summary_row {
   background-color: #FFFFFF;
   /* summary_row.background.color */
   padding: 6px;
@@ -208,13 +240,13 @@ assess_security_headers("https://cran.r-project.org") %>%
   /* summary_row.text_transform */
 }
 
-#dcxxmcqtmy .gt_first_summary_row {
+#lsgjsbdkdu .gt_first_summary_row {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #A8A8A8;
 }
 
-#dcxxmcqtmy .gt_table_body {
+#lsgjsbdkdu .gt_table_body {
   border-top-style: solid;
   /* field.border.top.style */
   border-top-width: 2px;
@@ -229,56 +261,56 @@ assess_security_headers("https://cran.r-project.org") %>%
   /* field.border.bottom.color */
 }
 
-#dcxxmcqtmy .gt_footnote {
+#lsgjsbdkdu .gt_footnote {
   font-size: 90%;
   /* footnote.font.size */
   padding: 4px;
   /* footnote.padding */
 }
 
-#dcxxmcqtmy .gt_sourcenote {
+#lsgjsbdkdu .gt_sourcenote {
   font-size: 90%;
   /* sourcenote.font.size */
   padding: 4px;
   /* sourcenote.padding */
 }
 
-#dcxxmcqtmy .gt_center {
+#lsgjsbdkdu .gt_center {
   text-align: center;
 }
 
-#dcxxmcqtmy .gt_left {
+#lsgjsbdkdu .gt_left {
   text-align: left;
 }
 
-#dcxxmcqtmy .gt_right {
+#lsgjsbdkdu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dcxxmcqtmy .gt_font_normal {
+#lsgjsbdkdu .gt_font_normal {
   font-weight: normal;
 }
 
-#dcxxmcqtmy .gt_font_bold {
+#lsgjsbdkdu .gt_font_bold {
   font-weight: bold;
 }
 
-#dcxxmcqtmy .gt_font_italic {
+#lsgjsbdkdu .gt_font_italic {
   font-style: italic;
 }
 
-#dcxxmcqtmy .gt_super {
+#lsgjsbdkdu .gt_super {
   font-size: 65%;
 }
 
-#dcxxmcqtmy .gt_footnote_glyph {
+#lsgjsbdkdu .gt_footnote_glyph {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="dcxxmcqtmy">
+<div id="lsgjsbdkdu">
 
 <!--gt table start-->
 
@@ -702,7 +734,7 @@ assess_security_headers("https://rud.is/b") %>%
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
-#pewqyuzxlm .gt_table {
+#fkvlcbxjkq .gt_table {
   border-collapse: collapse;
   margin-left: auto;
   margin-right: auto;
@@ -720,13 +752,13 @@ assess_security_headers("https://rud.is/b") %>%
   /* table.border.top.color */
 }
 
-#pewqyuzxlm .gt_heading {
+#fkvlcbxjkq .gt_heading {
   background-color: #FFFFFF;
   /* heading.background.color */
   border-bottom-color: #FFFFFF;
 }
 
-#pewqyuzxlm .gt_title {
+#fkvlcbxjkq .gt_title {
   color: #000000;
   font-size: 125%;
   /* heading.title.font.size */
@@ -737,7 +769,7 @@ assess_security_headers("https://rud.is/b") %>%
   border-bottom-width: 0;
 }
 
-#pewqyuzxlm .gt_subtitle {
+#fkvlcbxjkq .gt_subtitle {
   color: #000000;
   font-size: 85%;
   /* heading.subtitle.font.size */
@@ -748,7 +780,7 @@ assess_security_headers("https://rud.is/b") %>%
   border-top-width: 0;
 }
 
-#pewqyuzxlm .gt_bottom_border {
+#fkvlcbxjkq .gt_bottom_border {
   border-bottom-style: solid;
   /* heading.border.bottom.style */
   border-bottom-width: 2px;
@@ -757,7 +789,7 @@ assess_security_headers("https://rud.is/b") %>%
   /* heading.border.bottom.color */
 }
 
-#pewqyuzxlm .gt_column_spanner {
+#fkvlcbxjkq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #A8A8A8;
@@ -765,7 +797,7 @@ assess_security_headers("https://rud.is/b") %>%
   padding-bottom: 4px;
 }
 
-#pewqyuzxlm .gt_col_heading {
+#fkvlcbxjkq .gt_col_heading {
   color: #000000;
   background-color: #FFFFFF;
   /* column_labels.background.color */
@@ -777,11 +809,11 @@ assess_security_headers("https://rud.is/b") %>%
   margin: 10px;
 }
 
-#pewqyuzxlm .gt_sep_right {
+#fkvlcbxjkq .gt_sep_right {
   border-right: 5px solid #FFFFFF;
 }
 
-#pewqyuzxlm .gt_group_heading {
+#fkvlcbxjkq .gt_group_heading {
   padding: 8px;
   color: #000000;
   background-color: #FFFFFF;
@@ -804,7 +836,7 @@ assess_security_headers("https://rud.is/b") %>%
   /* stub_group.border.bottom  .color */
 }
 
-#pewqyuzxlm .gt_empty_group_heading {
+#fkvlcbxjkq .gt_empty_group_heading {
   padding: 0.5px;
   color: #000000;
   background-color: #FFFFFF;
@@ -827,28 +859,28 @@ assess_security_headers("https://rud.is/b") %>%
   /* stub_group.border.bottom  .color */
 }
 
-#pewqyuzxlm .gt_striped tr:nth-child(even) {
+#fkvlcbxjkq .gt_striped tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-#pewqyuzxlm .gt_row {
+#fkvlcbxjkq .gt_row {
   padding: 10px;
   /* row.padding */
   margin: 10px;
 }
 
-#pewqyuzxlm .gt_stub {
+#fkvlcbxjkq .gt_stub {
   border-right-style: solid;
   border-right-width: 2px;
   border-right-color: #A8A8A8;
   text-indent: 5px;
 }
 
-#pewqyuzxlm .gt_stub.gt_row {
+#fkvlcbxjkq .gt_stub.gt_row {
   background-color: #FFFFFF;
 }
 
-#pewqyuzxlm .gt_summary_row {
+#fkvlcbxjkq .gt_summary_row {
   background-color: #FFFFFF;
   /* summary_row.background.color */
   padding: 6px;
@@ -857,13 +889,13 @@ assess_security_headers("https://rud.is/b") %>%
   /* summary_row.text_transform */
 }
 
-#pewqyuzxlm .gt_first_summary_row {
+#fkvlcbxjkq .gt_first_summary_row {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #A8A8A8;
 }
 
-#pewqyuzxlm .gt_table_body {
+#fkvlcbxjkq .gt_table_body {
   border-top-style: solid;
   /* field.border.top.style */
   border-top-width: 2px;
@@ -878,56 +910,56 @@ assess_security_headers("https://rud.is/b") %>%
   /* field.border.bottom.color */
 }
 
-#pewqyuzxlm .gt_footnote {
+#fkvlcbxjkq .gt_footnote {
   font-size: 90%;
   /* footnote.font.size */
   padding: 4px;
   /* footnote.padding */
 }
 
-#pewqyuzxlm .gt_sourcenote {
+#fkvlcbxjkq .gt_sourcenote {
   font-size: 90%;
   /* sourcenote.font.size */
   padding: 4px;
   /* sourcenote.padding */
 }
 
-#pewqyuzxlm .gt_center {
+#fkvlcbxjkq .gt_center {
   text-align: center;
 }
 
-#pewqyuzxlm .gt_left {
+#fkvlcbxjkq .gt_left {
   text-align: left;
 }
 
-#pewqyuzxlm .gt_right {
+#fkvlcbxjkq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pewqyuzxlm .gt_font_normal {
+#fkvlcbxjkq .gt_font_normal {
   font-weight: normal;
 }
 
-#pewqyuzxlm .gt_font_bold {
+#fkvlcbxjkq .gt_font_bold {
   font-weight: bold;
 }
 
-#pewqyuzxlm .gt_font_italic {
+#fkvlcbxjkq .gt_font_italic {
   font-style: italic;
 }
 
-#pewqyuzxlm .gt_super {
+#fkvlcbxjkq .gt_super {
   font-size: 65%;
 }
 
-#pewqyuzxlm .gt_footnote_glyph {
+#fkvlcbxjkq .gt_footnote_glyph {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="pewqyuzxlm">
+<div id="fkvlcbxjkq">
 
 <!--gt table start-->
 
@@ -1363,7 +1395,7 @@ hdrs::explain_headers("https://community.rstudio.com/") %>%
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
-#tmtxhcsswb .gt_table {
+#mjauwpzaol .gt_table {
   border-collapse: collapse;
   margin-left: auto;
   margin-right: auto;
@@ -1381,13 +1413,13 @@ hdrs::explain_headers("https://community.rstudio.com/") %>%
   /* table.border.top.color */
 }
 
-#tmtxhcsswb .gt_heading {
+#mjauwpzaol .gt_heading {
   background-color: #FFFFFF;
   /* heading.background.color */
   border-bottom-color: #FFFFFF;
 }
 
-#tmtxhcsswb .gt_title {
+#mjauwpzaol .gt_title {
   color: #000000;
   font-size: 125%;
   /* heading.title.font.size */
@@ -1398,7 +1430,7 @@ hdrs::explain_headers("https://community.rstudio.com/") %>%
   border-bottom-width: 0;
 }
 
-#tmtxhcsswb .gt_subtitle {
+#mjauwpzaol .gt_subtitle {
   color: #000000;
   font-size: 85%;
   /* heading.subtitle.font.size */
@@ -1409,7 +1441,7 @@ hdrs::explain_headers("https://community.rstudio.com/") %>%
   border-top-width: 0;
 }
 
-#tmtxhcsswb .gt_bottom_border {
+#mjauwpzaol .gt_bottom_border {
   border-bottom-style: solid;
   /* heading.border.bottom.style */
   border-bottom-width: 2px;
@@ -1418,7 +1450,7 @@ hdrs::explain_headers("https://community.rstudio.com/") %>%
   /* heading.border.bottom.color */
 }
 
-#tmtxhcsswb .gt_column_spanner {
+#mjauwpzaol .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #A8A8A8;
@@ -1426,7 +1458,7 @@ hdrs::explain_headers("https://community.rstudio.com/") %>%
   padding-bottom: 4px;
 }
 
-#tmtxhcsswb .gt_col_heading {
+#mjauwpzaol .gt_col_heading {
   color: #000000;
   background-color: #FFFFFF;
   /* column_labels.background.color */
@@ -1438,11 +1470,11 @@ hdrs::explain_headers("https://community.rstudio.com/") %>%
   margin: 10px;
 }
 
-#tmtxhcsswb .gt_sep_right {
+#mjauwpzaol .gt_sep_right {
   border-right: 5px solid #FFFFFF;
 }
 
-#tmtxhcsswb .gt_group_heading {
+#mjauwpzaol .gt_group_heading {
   padding: 8px;
   color: #000000;
   background-color: #FFFFFF;
@@ -1465,7 +1497,7 @@ hdrs::explain_headers("https://community.rstudio.com/") %>%
   /* stub_group.border.bottom  .color */
 }
 
-#tmtxhcsswb .gt_empty_group_heading {
+#mjauwpzaol .gt_empty_group_heading {
   padding: 0.5px;
   color: #000000;
   background-color: #FFFFFF;
@@ -1488,28 +1520,28 @@ hdrs::explain_headers("https://community.rstudio.com/") %>%
   /* stub_group.border.bottom  .color */
 }
 
-#tmtxhcsswb .gt_striped tr:nth-child(even) {
+#mjauwpzaol .gt_striped tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-#tmtxhcsswb .gt_row {
+#mjauwpzaol .gt_row {
   padding: 10px;
   /* row.padding */
   margin: 10px;
 }
 
-#tmtxhcsswb .gt_stub {
+#mjauwpzaol .gt_stub {
   border-right-style: solid;
   border-right-width: 2px;
   border-right-color: #A8A8A8;
   text-indent: 5px;
 }
 
-#tmtxhcsswb .gt_stub.gt_row {
+#mjauwpzaol .gt_stub.gt_row {
   background-color: #FFFFFF;
 }
 
-#tmtxhcsswb .gt_summary_row {
+#mjauwpzaol .gt_summary_row {
   background-color: #FFFFFF;
   /* summary_row.background.color */
   padding: 6px;
@@ -1518,13 +1550,13 @@ hdrs::explain_headers("https://community.rstudio.com/") %>%
   /* summary_row.text_transform */
 }
 
-#tmtxhcsswb .gt_first_summary_row {
+#mjauwpzaol .gt_first_summary_row {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #A8A8A8;
 }
 
-#tmtxhcsswb .gt_table_body {
+#mjauwpzaol .gt_table_body {
   border-top-style: solid;
   /* field.border.top.style */
   border-top-width: 2px;
@@ -1539,56 +1571,56 @@ hdrs::explain_headers("https://community.rstudio.com/") %>%
   /* field.border.bottom.color */
 }
 
-#tmtxhcsswb .gt_footnote {
+#mjauwpzaol .gt_footnote {
   font-size: 90%;
   /* footnote.font.size */
   padding: 4px;
   /* footnote.padding */
 }
 
-#tmtxhcsswb .gt_sourcenote {
+#mjauwpzaol .gt_sourcenote {
   font-size: 90%;
   /* sourcenote.font.size */
   padding: 4px;
   /* sourcenote.padding */
 }
 
-#tmtxhcsswb .gt_center {
+#mjauwpzaol .gt_center {
   text-align: center;
 }
 
-#tmtxhcsswb .gt_left {
+#mjauwpzaol .gt_left {
   text-align: left;
 }
 
-#tmtxhcsswb .gt_right {
+#mjauwpzaol .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tmtxhcsswb .gt_font_normal {
+#mjauwpzaol .gt_font_normal {
   font-weight: normal;
 }
 
-#tmtxhcsswb .gt_font_bold {
+#mjauwpzaol .gt_font_bold {
   font-weight: bold;
 }
 
-#tmtxhcsswb .gt_font_italic {
+#mjauwpzaol .gt_font_italic {
   font-style: italic;
 }
 
-#tmtxhcsswb .gt_super {
+#mjauwpzaol .gt_super {
   font-size: 65%;
 }
 
-#tmtxhcsswb .gt_footnote_glyph {
+#mjauwpzaol .gt_footnote_glyph {
   font-style: italic;
   font-size: 65%;
 }
 </style>
 
-<div id="tmtxhcsswb">
+<div id="mjauwpzaol">
 
 <!--gt table start-->
 
@@ -1824,7 +1856,7 @@ date
 
 <td class="gt_row gt_left">
 
-Tue, 05 Mar 2019 20:01:53 GMT
+Wed, 06 Mar 2019 12:27:24 GMT
 
 </td>
 
@@ -2164,7 +2196,7 @@ x-request-id
 
 <td class="gt_row gt_left">
 
-3c66650e-0bbf-4b71-8164-10a422d55ae4
+4535cc47-f085-4bad-80ae-97aa50034956
 
 </td>
 
@@ -2198,7 +2230,7 @@ x-runtime
 
 <td class="gt_row gt_left">
 
-0.106562
+0.117140
 
 </td>
 
@@ -2293,10 +2325,10 @@ dplyr::glimpse(http_headers)
 
 ## hdrs Metrics
 
-| Lang | \# Files |  (%) | LoC |  (%) | Blank lines |  (%) | \# Lines |  (%) |
-| :--- | -------: | ---: | --: | ---: | ----------: | ---: | -------: | ---: |
-| R    |       10 | 0.91 | 175 | 0.91 |          33 | 0.56 |       73 | 0.61 |
-| Rmd  |        1 | 0.09 |  17 | 0.09 |          26 | 0.44 |       47 | 0.39 |
+| Lang | \# Files |  (%) | LoC | (%) | Blank lines |  (%) | \# Lines |  (%) |
+| :--- | -------: | ---: | --: | --: | ----------: | ---: | -------: | ---: |
+| R    |       11 | 0.92 | 186 | 0.9 |          37 | 0.57 |       85 | 0.63 |
+| Rmd  |        1 | 0.08 |  21 | 0.1 |          28 | 0.43 |       50 | 0.37 |
 
 ## Code of Conduct
 

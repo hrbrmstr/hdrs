@@ -4,13 +4,15 @@
 \alias{assess_security_headers}
 \title{Assess "security" headers for a given URL}
 \usage{
-assess_security_headers(url, include_ref = FALSE)
+assess_security_headers(url, include_ref = FALSE, ...)
 }
 \arguments{
 \item{url}{target URL}
 
 \item{include_ref}{if \code{TRUE} (default: \code{FALSE}) the data frame will contains
 information reference fields from \link{http_headers}}
+
+\item{...}{passed on to the final \code{\link[httr:HEAD]{httr::HEAD()}} request.}
 }
 \value{
 data frame (tibble)

@@ -27,6 +27,8 @@ data frame is also provided via the 'hsecsecan' project
 
 The following functions are implemented:
 
+
+- `as.data.frame.insensitive`:	Turn `httr::headers()` objects into a data frame
 - `assess_security_headers`:	Assess "security" headers for a given URL
 - `explain_headers`:	Explain HTTP headers found from a URL request
 - `explore_app`:	A Shiny App for Exploring HTTP Headers
@@ -42,10 +44,17 @@ install.packages("hdrs", repos = "https://cinc.rud.is/")
 
 ```{r lib-ex}
 library(hdrs)
+library(tibble) # for printing
 
 # current version
 packageVersion("hdrs")
 
+```
+
+```{r df}
+httr::HEAD("https://rud.is/b") %>% 
+  httr::headers() %>% 
+  as.data.frame()
 ```
 
 ```{r basic}

@@ -1,7 +1,7 @@
-get_response_headers <- function(url) {
+get_response_headers <- function(url, ...) {
 
   tryCatch(
-    httr::HEAD(url),
+    httr::HEAD(url, ...),
     error = function(e) stop(e)
   ) -> res
 

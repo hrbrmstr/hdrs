@@ -4,11 +4,12 @@
 #'  from [http_headers].
 #'
 #' @param url target URL
+#' @param ... passed on to the final [httr::HEAD()] request.
 #' @return data frame (tibble)
 #' @export
-explain_headers <- function(url) {
+explain_headers <- function(url, ...) {
 
-  res <- get_response_headers(url)
+  res <- get_response_headers(url, ...)
 
   if (length(res)) {
 

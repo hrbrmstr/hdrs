@@ -4,10 +4,12 @@
 \alias{explain_headers}
 \title{Explain HTTP headers found from a URL request}
 \usage{
-explain_headers(url)
+explain_headers(url, ...)
 }
 \arguments{
 \item{url}{target URL}
+
+\item{...}{passed on to the final \code{\link[httr:HEAD]{httr::HEAD()}} request.}
 }
 \value{
 data frame (tibble)
